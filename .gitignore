@@ -1,0 +1,11 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# Fichiers de sortie générés par le script
+SyntheseEndoMyco_MG_fini.csv
+resultats-*.csv
+
+# Fichiers système
+Thumbs.db
