@@ -1,4 +1,5 @@
 library(shiny)
+library(DT)
 shinyServer(function(input, output, session) {
   
   # Variable réactive pour stocker le résultat du script
@@ -10,6 +11,15 @@ shinyServer(function(input, output, session) {
     
     # Lit le fichier CSV déposé par l'utilisateur
     df <- read.csv(input$file1$datapath,sep=";")
+    
+    # Vérification de la structure du fichier (colonnes obligatoires)
+    cols_requises <- c("Echantillon", "Infection", "Mucoro", "Glomero", "a_glo", "v_glo", "a_muc")
+    cols_manquantes <- setdiff(cols_requises, colnames(df))
+    
+    if (length(cols_manquantes) > 0) {
+      showNotification(paste("Erreur : Colonnes manquantes ou séparateur incorrect. Manque :", paste(cols_manquantes, collapse = ", ")), type = "error", duration = NULL)
+      return()
+    }
     
     print(df)
     
@@ -148,11 +158,6 @@ shinyServer(function(input, output, session) {
     # Met à jour la variable réactive avec le résultat
     resultat_script(sortieEch)
     
-    # Affiche le résumé dans l'interface pour l'utilisateur
-    output$summary <- renderPrint({
-      sortieEch
-    })
-    
   })
   
   # Logique pour le bouton de téléchargement
@@ -173,4 +178,10 @@ shinyServer(function(input, output, session) {
       write.csv(as.data.frame(resultat_script()), file, row.names = TRUE)
     }
   )
+  
+  # Affiche le tableau de résultats avec une mise en forme interactive (DT)
+  output$summary <- renderDataTable({
+    req(resultat_script())
+    datatable(as.data.frame(resultat_script()), options = list(scrollX = TRUE), rownames = FALSE)
+  })
 })
