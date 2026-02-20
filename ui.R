@@ -5,21 +5,21 @@ library(DT)
 shinyUI(fluidPage(
   theme = shinytheme("flatly"),
   
-  titlePanel("Analyse de Mycorhization"),
+  titlePanel("Mycorrhization rate indexes"),
   
   sidebarLayout(
     sidebarPanel(
-      h4("Paramètres"),
-      fileInput("file1", "Choisir un fichier CSV",
+      h4("Parameters"),
+      fileInput("file1", "Select CSV file",
                 multiple = FALSE,
                 accept = c("text/csv",
                            "text/comma-separated-values,text/plain",
                            ".csv")),
-      helpText("Le séparateur doit être le point-virgule (;)."),
+      helpText("Column separator must be semicolon (;)."),
       tags$hr(),
-      actionButton("runScript", "Lancer l'analyse", class = "btn-primary", icon = icon("play")),
+      actionButton("runScript", "Start analysis", class = "btn-primary", icon = icon("play")),
       tags$hr(),
-      downloadButton("downloadData", "Télécharger les résultats", class = "btn-success") 
+      downloadButton("downloadData", "Downlowd results", class = "btn-success") 
     ),
     mainPanel(
       DTOutput("summary")

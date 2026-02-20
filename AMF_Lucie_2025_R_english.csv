@@ -1,4 +1,4 @@
-Echantillon;Fragment;Infection;a_glo;v_glo;a_muc;Glomero;Mucoro
+Sample;Fragment;Global_colonisation;a_glo;v_glo;a_muc;Glomero_rate;Mucoro_rate
 MP_5_T1;1;4;0;0;3;0;100
 MP_5_T1;2;3;0;0;3;0;100
 MP_5_T1;3;3;0;0;3;0;100
