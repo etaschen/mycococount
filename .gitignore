@@ -2,6 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
+.rinpochon.Rproj
 
 # Fichiers de sortie générés par le script
 SyntheseEndoMyco_MG_fini.csv
